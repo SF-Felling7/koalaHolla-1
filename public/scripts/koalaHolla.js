@@ -5,22 +5,22 @@ $( document ).ready( function(){
   // load existing koalas on page load
   getKoalas();
 
-  // add koala button click
-  $( '#addButton' ).on( 'click', function(){
-    console.log( 'in addButton on click' );
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
-    var objectToSend = {
-      name: 'testName',
-      age: 'testName',
-      sex: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
-    };
-    // call saveKoala with the new obejct
-    saveKoala( objectToSend );
-  }); //end addButton on click
+//   // add koala button click
+//   $( '#addButton' ).on( 'click', function(){
+//     console.log( 'in addButton on click' );
+//     // get user input and put in an object
+//     // NOT WORKING YET :(
+//     // using a test object
+//     var objectToSend = {
+//       name: 'testName',
+//       age: 'testName',
+//       sex: 'testName',
+//       readyForTransfer: 'testName',
+//       notes: 'testName',
+//     };
+//     // call saveKoala with the new obejct
+//     // saveKoala( objectToSend );
+//   }); //end addButton on click
 }); // end doc ready
 
 var getKoalas = function(){
@@ -31,20 +31,24 @@ var getKoalas = function(){
     type: 'GET',
     success: function( data ){
       console.log( 'got some koalas: ', data );
+      $( '#viewKoalas' ).empty();
+      for (var i = 0; i < data.length; i++) {
+        $( '#viewKoalas' ).append( '<p>' + data[i].name + ' ' + data[i].sex + ' ' + data[i].age +' '+data[i].transfer+' '+data[i].notes+'</p>' );
+      }
     } // end success
   }); //end ajax
   // display on DOM with buttons that allow edit of each
-} // end getKoalas
+}; // end getKoalas
 
-var saveKoala = function( newKoala ){
-  console.log( 'in saveKoala', newKoala );
-  // ajax call to server to get koalas
-  $.ajax({
-    url: '/addKoala',
-    type: 'post',
-    data: newKoala,
-    success: function( data ){
-      console.log( 'got some koalas: ', data );
-    } // end success
-  }); //end ajax
-}
+// var saveKoala = function( newKoala ){
+//   console.log( 'in saveKoala', newKoala );
+//   // ajax call to server to get koalas
+//   $.ajax({
+//     url: '/addKoala',
+//     type: 'post',
+//     data: newKoala,
+//     success: function( data ){
+//       console.log( 'got some koalas: ', data );
+//     } // end success
+//   }); //end ajax
+// };

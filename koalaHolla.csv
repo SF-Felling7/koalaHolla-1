@@ -5,3 +5,18 @@ Ororo,F,7,N,loves listening to Paula (Abdul)
 Logan,M,15,N,Love the sauna
 Charlie,M,9,Y,Favorite band is Nirvana
 Betsy,F,4,Y,Has a pet iguana
+
+CREATE TABLE koala (
+	name VARCHAR(55),
+  sex VARCHAR(1),
+	age INTEGER,
+	transfer VARCHAR(1),
+	notes VARCHAR (200)
+);
+
+INSERT INTO koala VALUES ('Scotty','M','4','Y','Born in Guatemala');
+INSERT INTO koala VALUES ('Jean','F','5','Y','Allerigic to lots of lava');
+INSERT INTO koala VALUES ('Ororo','F','7','N','loves listening to Paula (Abdul)');
+INSERT INTO koala VALUES ('Logan','M','15','N','Love the sauna');
+INSERT INTO koala VALUES ('Charlie','M','9','Y','Favorite band is Nirvana');
+INSERT INTO koala VALUES ('Betsy','F','4','Y','Has a pet iguana');
