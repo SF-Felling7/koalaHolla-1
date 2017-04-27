@@ -34,14 +34,7 @@ app.get( '/', function( req, res ){
 // get koalas
 app.get( '/getKoalas', function( req, res ){
   console.log( 'getKoalas route hit' );
-  //assemble object to send
-  // var objectToSend={
-  //   response: allKoalas
-  // }; //end objectToSend
-  // //send info back to client
-  // console.log(objectToSend);
-  // res.send( objectToSend );
-  // array of koalas
+  // array of koalas to respond to ajax get
   var allKoalas=[];
   // connect to db
   pool.connect( function(err, connection, done) {
@@ -70,16 +63,26 @@ app.get( '/getKoalas', function( req, res ){
   }); //end pool
 });
 
-// // add koala
-// app.post( '/addKoala', urlencodedParser, function( req, res ){
-//   console.log( 'addKoala route hit' );
-//   //assemble object to send
-//   var objectToSend={
-//     response: res.body
-//   }; //end objectToSend
-//   //send info back to client
-//   res.send( objectToSend );
-// });
+// add koala
+app.post( '/addKoala', urlencodedParser, function( req, res ){
+  console.log( 'addKoala route hit' );
+  // connect to db
+  pool.connect( function(err, connection, done) {
+    //check if there was an error
+    if(err) {
+      console.log('err');
+      //respond with PROBLEM!
+      res.send( 400 );
+    } else {
+      console.log('connected to db');
+      // send query for all koalas in the 'koala' table and hold in a variable (resultSet)
+      connection.query( "INSERT INTO koala (name,sex,age,transfer,notes) VALUES ($1,$2,$3,$4,$5)",[req.body.name,req.body.sex,req.body.age,req.body.transfer,req.body.notes] );
+      // close connection to reopen spot in pool
+      done();
+    } //end on end
+  }); //end pool
+  res.send(200);
+});
 
 // // add koala
 // app.post( '/editKoala', urlencodedParser, function( req, res ){
